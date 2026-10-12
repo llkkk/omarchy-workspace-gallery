@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 import "."
-import qs.Commons
+import qs.Commons as Commons
 import QtQuick
 import Quickshell
 import "ColorUtils.js" as ColorUtils

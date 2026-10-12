@@ -1,7 +1,8 @@
+import "CompatUi" as ThemeUi
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Hyprland
-import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 import "." as Local
 
@@ -35,7 +36,7 @@ BarWidget {
     Component.onCompleted: root.syncSetting()
     onSettingsChanged: root.syncSetting()
 
-    BarIconButton {
+    ThemeUi.BarIconButton {
         id: button
         anchors.fill: parent
         bar: root.bar
@@ -54,20 +55,20 @@ BarWidget {
         }
     }
 
-    PopupCard {
+    ThemeUi.PopupCard {
         id: menu
         anchorItem: button
         owner: root
         bar: root.bar
         open: root.menuOpen
-        padding: Style.space(8)
-        contentWidth: menu.fittedContentWidth(Style.space(240))
+        padding: Commons.Style.space(8)
+        contentWidth: menu.fittedContentWidth(Commons.Style.space(240))
         contentHeight: menu.fittedContentHeight(choices.implicitHeight)
 
         Column {
             id: choices
             anchors.fill: parent
-            spacing: Style.space(2)
+            spacing: Commons.Style.space(2)
 
             Repeater {
                 model: [
@@ -81,31 +82,31 @@ BarWidget {
                     readonly property bool selected:
                         Local.GlobalStates.closeWindowSwitchWorkspace === choice.modelData.enabled
                     width: choices.width
-                    height: Style.space(34)
-                    radius: Math.max(2, Style.cornerRadius)
+                    height: Commons.Style.space(34)
+                    radius: Math.max(2, Commons.Style.cornerRadius)
                     color: choiceMouse.containsMouse || choice.selected
-                        ? Style.hoverFillFor(Color.popups.text, Color.accent)
+                        ? Commons.Style.hoverFillFor(Commons.Color.popups.text, Commons.Color.accent)
                         : "transparent"
 
                     Text {
                         anchors.left: parent.left
-                        anchors.leftMargin: Style.space(10)
+                        anchors.leftMargin: Commons.Style.space(10)
                         anchors.verticalCenter: parent.verticalCenter
                         text: choice.modelData.label
-                        color: Color.popups.text
-                        font.family: root.bar ? root.bar.fontFamily : Style.font.family
-                        font.pixelSize: Style.font.body
+                        color: Commons.Color.popups.text
+                        font.family: root.bar ? root.bar.fontFamily : Commons.Style.font.family
+                        font.pixelSize: Commons.Style.font.body
                     }
 
                     Text {
                         anchors.right: parent.right
-                        anchors.rightMargin: Style.space(10)
+                        anchors.rightMargin: Commons.Style.space(10)
                         anchors.verticalCenter: parent.verticalCenter
                         text: "✓"
                         visible: choice.selected
-                        color: Color.accent
-                        font.family: root.bar ? root.bar.fontFamily : Style.font.family
-                        font.pixelSize: Style.font.body
+                        color: Commons.Color.accent
+                        font.family: root.bar ? root.bar.fontFamily : Commons.Style.font.family
+                        font.pixelSize: Commons.Style.font.body
                     }
 
                     MouseArea {
